@@ -1,0 +1,24 @@
+{
+  "name": "login-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "dependencies": {
+    "node-static": "^0.7.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boakaidorborkamara/Login-App.git"
+  },
+  "author": "\"Boakai Kamara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boakaidorborkamara/Login-App/issues"
+  },
+  "homepage": "https://github.com/boakaidorborkamara/Login-App#readme"
+}

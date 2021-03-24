@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <!-- <link rel="stylesheet" href="./public/styles"> -->
+    <title>Registration App</title>
+    <!-- <link rel="stylesheet" href="./public/style.css"> -->
     <style>
         body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -73,59 +73,50 @@ input[type=button]{
 input[type=submit]:hover{
     cursor: pointer; 
 }
-
-
-
-input[type=submit]:hover{
-    font-weight: bold;
-    background-color:rgb(56, 8, 56) ;
-    outline: none;
-    border: none;
-    stroke: none;
-    padding: 10px;
-}
     </style>
 </head>
 <body>
     <div id="container">
-        <h1>Login</h1>
+        <h1>Registration Form</h1>
         <form action="">
-            <input type="text" name="User Name" placeholder="User Name" id="user-name" required>
-            <input type="password" name="Password" placeholder="Password" id="user-password" required>
-            <p><a href="">Forget Password?</a></p>
-            <input type="button" value="LOGIN" onclick="getUserLoginDetail()">
+            <input type="text" name="Full Name" id="fullName" placeholder="Full Name" required>
+            <input type="text" name="User Name" id="userName" placeholder="User Name" required>
+            <input type="email" name="Email" id="Email" placeholder="Email" required>
+            <input type="password" name="Password" id="Password" placeholder="Password" required>
+            <input type="button" value="REGISTER"  onclick="getFormData()">
         </form>
-        <p>Not a member? <span><a href="/">Register</a></span></p>
+        <p>Already have an account? <span><a href="/login">Login</a></span></p>
     </div>
     <script>
-      
+        
 
-        function getUserLoginDetail(){
-            let user_name = document.getElementById('user-name').value;
-            let user_password = document.getElementById('user-password').value
+        function getFormData(){
+            let full_name = document.getElementById('fullName').value;
+            let user_name = document.getElementById('userName').value;
+            let email = document.getElementById('Email').value;
+            let password = document.getElementById('Password').value;
 
-            let user_login_detail ={
+            let userdata ={
+                fullName:full_name,
                 userName:user_name,
-                password:user_password
+                email: email,
+                password:password
             }
-            console.log(user_login_detail);
-
-            fetch('/login',{
+            console.log(userdata);
+        
+            fetch('/register',{
                 method:"POST",
                 "Content-Type": "application/json",
-                body:JSON.stringify(user_login_detail)
+                body:JSON.stringify(userdata)
                 
             })
             .then(res => res.json())
             .then((data)=>{
-                console.log(data.status_message);
-                alert(data.status_message);
                 if(data.status === 0){
-                    window.location.href = '/profile' 
+                    window.location.href = '/login';
+                    alert(data.status_message);
                 }
-                else{
-                    window.location.href = '/login'
-                }
+                else(window.location.href = "/");
             })
             .catch((err )=>{
                 console.log(err);

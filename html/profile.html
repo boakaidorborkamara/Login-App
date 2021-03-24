@@ -4,31 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
-    <link rel="stylesheet" href="./styles/style.css">
+    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
+    <style>
+        body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(54, 2, 54);
+    display: flex;
+    justify-content: center;
+    
+}
+
+#container{
+    width: 25vw;
+    height: 65vh;
+    background-color: white;
+    display: flex;
+    padding: 15px;
+    border-radius: 5%;
+    margin-top: 100px;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h1{
+    text-align: center;
+    color: gb(54, 2, 54) ;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+form input{
+    margin-bottom: 15px;
+    padding: 5px;
+    font-size: 1em;
+    width: 90%;
+    border-radius: 10px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+form input:hover{
+    border-bottom: 2px solid rgb(54, 2, 54);
+}
+
+input[type=submit]{
+    width:  50%;
+    font-size: 1.2em;
+    margin-bottom: 4px;
+    margin-top: 18px;
+    background-color:rgb(54, 2, 54) ;
+    color: white;
+    outline: none;
+    border: none;
+    stroke: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+
+
+input[type=submit]:hover{
+    font-weight: bold;
+    background-color:rgb(56, 8, 56) ;
+    outline: none;
+    border: none;
+    stroke: none;
+    padding: 10px;
+}
+
+table,td{
+    text-align: left;
+    border: 1px solid purple;
+    border-collapse: collapse;
+}
+
+td{
+    padding: 5px;
+}
+    </style>
 </head>
 <body>
     <div id="container">
         <h1>Profile Page</h1>
         <table>
-            <thead>
-                <th>
-                    <tr>
-                        <td>Full Name:</td>
-                        <td>-----</td>
-                    </tr>
-                    <tr>
-                        <td>Email:</td>
-                        <td>-----</td>
-                    </tr>
-                    <tr>
-                        <td>Password:</td>
-                        <td>-----</td>
-                    </tr>
-                </th>
-            </thead>
+            <tbody id="table-data">
+                    
+            </tbody>
         </table>
         <p>Your informations are secure with us !</p>
     </div>
+
+    <script>
+       
+        fetch('/profile-detail')
+        .then(res => res.json())
+        .then((data)=>{
+            
+            let user_info = JSON.parse(data);
+            
+            let displayed_data = Object.entries(user_info)
+            displayed_data.forEach(ele => {
+                let table_data = document.getElementById('table-data');
+                console.log(table_data);
+                console.log(ele);
+                let table_row = document.createElement('tr');
+                let table_data1 = document.createElement('td');
+                let table_data2 = document.createElement('td');
+                let data_text1 = document.createTextNode( ele[0]);
+                let data_text2 = document.createTextNode(ele[1]);
+
+                table_row.appendChild(table_data1);
+                table_row.appendChild(table_data2)
+                table_data1.appendChild(data_text1);
+                table_data2.appendChild(data_text2);
+                table_data.appendChild(table_row);
+            });
+        })
+    </script>
     
 </body>
 </html>
